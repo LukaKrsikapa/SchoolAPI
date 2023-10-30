@@ -1,6 +1,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using SchoolAPI.Data;
+using System.Reflection;
 
 namespace SchoolAPI
 {
@@ -21,6 +22,7 @@ namespace SchoolAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             var app = builder.Build();
 

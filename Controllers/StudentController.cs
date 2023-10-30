@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SchoolAPI.Data;
 using SchoolAPI.Data.Entities;
+using SchoolAPI.Models;
 
 namespace SchoolAPI.Controllers
 {
@@ -9,32 +11,35 @@ namespace SchoolAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentRepository _studentRepository;
+        private readonly IMapper _mapper;
 
-        public StudentController(IStudentRepository studentRepository)
+        public StudentController(IStudentRepository studentRepository, IMapper mapper)
         {
             _studentRepository = studentRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult Get(int id)
+        public ActionResult<List<StudentModel>> Get()
         {
-            IEnumerable<Student> result;
+            IEnumerable<Student> students;
             try
             {
-                result = _studentRepository.AllStudents;
+                students = _studentRepository.AllStudents;
 
-                if (result != null)
+                if (students != null)
                 {
+                    List<StudentModel> result = _mapper.Map<List<StudentModel>>(students);
                     return Ok(result);
                 }
                 else
                 {
-                    return NotFound();
+                    return NotFound(new {Text = "Couldn't find any students"});
                 }
             }
             catch
             {
-                return BadRequest(new { ErrorCode = "400", Message = "No no, very bad", RandomText = "texty text text"});
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }
