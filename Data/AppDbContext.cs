@@ -12,10 +12,22 @@ namespace SchoolAPI.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Department>().HasData(new Department
+            {
+                Id = 1,
+                Name = "Microsoft Web Development"
+            });
+            modelBuilder.Entity<Department>().HasData(new Department
+            {
+                Id = 2,
+                Name = "Microsoft Desktop Development"
+            });
 
             modelBuilder.Entity<Course>().HasData(new Course
             {
@@ -40,13 +52,43 @@ namespace SchoolAPI.Data
             {
                 Id = 1,
                 FirstName = "Luka",
-                LastName = "Krsikapa"
+                LastName = "Krsikapa",
+                DepartmentId = 2
             });
             modelBuilder.Entity<Student>().HasData(new Student
             {
                 Id = 2,
                 FirstName = "John",
-                LastName = "Doe"
+                LastName = "Doe",
+                DepartmentId = 1
+            });
+            modelBuilder.Entity<Student>().HasData(new Student
+            {
+                Id = 3,
+                FirstName = "Radovan",
+                LastName = "Andjelkovic",
+                DepartmentId = 2
+            });
+            modelBuilder.Entity<Student>().HasData(new Student
+            {
+                Id = 4,
+                FirstName = "Kristina",
+                LastName = "Jakovljevic",
+                DepartmentId = 1
+            });
+            modelBuilder.Entity<Student>().HasData(new Student
+            {
+                Id = 5,
+                FirstName = "Tijana",
+                LastName = "Gladic",
+                DepartmentId = 1
+            });
+            modelBuilder.Entity<Student>().HasData(new Student
+            {
+                Id = 6,
+                FirstName = "Andrija",
+                LastName = "Marjanovic",
+                DepartmentId = 1
             });
         }
     }

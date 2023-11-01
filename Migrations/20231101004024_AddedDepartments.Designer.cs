@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolAPI.Data;
 
@@ -10,9 +11,11 @@ using SchoolAPI.Data;
 namespace SchoolAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231101004024_AddedDepartments")]
+    partial class AddedDepartments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +137,7 @@ namespace SchoolAPI.Migrations
                         new
                         {
                             Id = 1,
-                            DepartmentId = 2,
+                            DepartmentId = 1,
                             FirstName = "Luka",
                             LastName = "Krsikapa"
                         },
@@ -144,34 +147,6 @@ namespace SchoolAPI.Migrations
                             DepartmentId = 1,
                             FirstName = "John",
                             LastName = "Doe"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DepartmentId = 2,
-                            FirstName = "Radovan",
-                            LastName = "Andjelkovic"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DepartmentId = 1,
-                            FirstName = "Kristina",
-                            LastName = "Jakovljevic"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DepartmentId = 1,
-                            FirstName = "Tijana",
-                            LastName = "Gladic"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DepartmentId = 1,
-                            FirstName = "Andrija",
-                            LastName = "Marjanovic"
                         });
                 });
 

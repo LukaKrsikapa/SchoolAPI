@@ -22,6 +22,7 @@ namespace SchoolAPI
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             var app = builder.Build();

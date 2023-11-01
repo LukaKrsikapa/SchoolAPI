@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using SchoolAPI.Data.Entities;
+using SchoolAPI.Models;
 
 namespace SchoolAPI.Data
 {
@@ -7,7 +8,8 @@ namespace SchoolAPI.Data
     {
         public StudentProfile()
         {
-            this.CreateMap<Student, StudentProfile>();
+            this.CreateMap<Student, StudentModel>();
+            this.CreateMap<StudentModel, Student>();
         }
     }
 }
