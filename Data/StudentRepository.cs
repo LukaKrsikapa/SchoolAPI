@@ -34,7 +34,6 @@ namespace SchoolAPI.Data
         public Student UpdateStudent(Student newStudent)
         {
             throw new NotImplementedException();
-            //test123
         }
     }
 }
