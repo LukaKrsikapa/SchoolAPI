@@ -30,5 +30,11 @@ namespace SchoolAPI.Data
             result = _db.Students.Include(s => s.Department).FirstOrDefault(s => s.Id == id);
             return result;
         }
+
+        public Student UpdateStudent(Student newStudent)
+        {
+            throw new NotImplementedException();
+            //test123
+        }
     }
 }

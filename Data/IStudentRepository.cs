@@ -8,5 +8,6 @@ namespace SchoolAPI.Data
         public IEnumerable<Student> AllStudents { get; }
         Student GetStudentById(int? id);
         Student AddStudent(Student newStudent);
+        Student UpdateStudent(Student newStudent);
     }
 }
