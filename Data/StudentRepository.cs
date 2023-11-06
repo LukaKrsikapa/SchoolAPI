@@ -23,7 +23,7 @@ namespace SchoolAPI.Data
             return newStudent;
         }
 
-        public Student? DeleteStudent(int deletedStudentId)
+        public bool DeleteStudent(int deletedStudentId)
         {
             Student result = GetStudentById(deletedStudentId);
             if(result != null)
