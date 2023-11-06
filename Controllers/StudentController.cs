@@ -124,7 +124,7 @@ namespace SchoolAPI.Controllers
         {
             try
             {
-                if(studentId != null)
+                if(studentId != 0)
                 {
                     _studentRepository.DeleteStudent(studentId);
                 }
