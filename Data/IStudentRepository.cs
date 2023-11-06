@@ -9,5 +9,6 @@ namespace SchoolAPI.Data
         Student? GetStudentById(int? id);
         Student? AddStudent(Student newStudent);
         Student? UpdateStudent(Student updatedStudent);
+        Student? DeleteStudent(int deletedStudentId);
     }
 }
