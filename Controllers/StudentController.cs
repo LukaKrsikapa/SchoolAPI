@@ -21,7 +21,23 @@ namespace SchoolAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("AllStudents")]
+        public ActionResult<List<StudentModel>> GetAllStudets()
+        {
+            try
+            {
+                IEnumerable<Student> students = _studentRepository.AllStudents;
+                List<StudentModel> result = _mapper.Map<List<StudentModel>>(students);
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("ByDeptId")]
         public ActionResult<List<StudentModel>> GetByDepartmentId(int? departmentId)
         {
             IEnumerable<Student> students;
@@ -29,7 +45,7 @@ namespace SchoolAPI.Controllers
             {
                 if(departmentId == null)
                 {
-                    students = _studentRepository.AllStudents;
+                    return BadRequest("Id is required");
                 }
                 else
                 {
@@ -52,17 +68,16 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpGet("StudentById")]
+        [HttpGet("ById")]
         public ActionResult<StudentModel> GetById(int? id)
         {
-            IEnumerable<Student> students;
             try
             {
                 if(id == null)
                 {
                     return BadRequest("Parameter \"id\" is required");
                 }
-                Student student = _studentRepository.GetStudentById(id);
+                Student? student = _studentRepository.GetStudentById(id);
                 if(student != null)
                 {
                     StudentModel result = _mapper.Map<StudentModel>(student);
@@ -79,7 +94,7 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public ActionResult<StudentModel> Post(StudentModel newStudent)
         {
             try
@@ -96,7 +111,7 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("Update")]
         public ActionResult<StudentModel> Put(StudentModel updatedStudent)
         {
             try
@@ -119,7 +134,7 @@ namespace SchoolAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public ActionResult<StudentModel> Put(int studentId)
         {
             try

@@ -25,7 +25,7 @@ namespace SchoolAPI.Data
 
         public bool DeleteStudent(int deletedStudentId)
         {
-            Student studentToDelete = GetStudentById(deletedStudentId);
+            Student? studentToDelete = GetStudentById(deletedStudentId);
             if(studentToDelete != null)
             {
                 _db.Remove(studentToDelete);
