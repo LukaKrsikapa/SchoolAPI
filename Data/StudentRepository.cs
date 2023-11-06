@@ -16,24 +16,32 @@ namespace SchoolAPI.Data
 
         public IEnumerable<Student> AllStudents => _db.Students.Include(s => s.Department);
 
-        public Student AddStudent(Student newStudent)
+        public Student? AddStudent(Student newStudent)
         {
             _db.Students.Add(newStudent);
             _db.SaveChanges();
             return newStudent;
         }
 
-        public Student GetStudentById(int? id)
+        public Student? GetStudentById(int? id)
         {
-            Student result;
+            Student? result;
 
             result = _db.Students.Include(s => s.Department).FirstOrDefault(s => s.Id == id);
             return result;
         }
 
-        public Student UpdateStudent(Student newStudent)
+        public Student? UpdateStudent(Student updatedStudent)
         {
-            throw new NotImplementedException();
+            Student? studentToUpdate = GetStudentById(updatedStudent.Id);
+            if(studentToUpdate != null)
+            {
+                studentToUpdate.FirstName = updatedStudent.FirstName;
+                studentToUpdate.LastName = updatedStudent.LastName;
+                studentToUpdate.DepartmentId = updatedStudent.DepartmentId;
+                _db.SaveChanges();
+            }
+            return studentToUpdate;
         }
     }
 }

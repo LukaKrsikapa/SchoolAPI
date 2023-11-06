@@ -84,11 +84,35 @@ namespace SchoolAPI.Controllers
         {
             try
             {
-                Student studentToAdd = _mapper.Map<Student>(newStudent);
+                Student? studentToAdd = _mapper.Map<Student>(newStudent);
                 studentToAdd = _studentRepository.AddStudent(studentToAdd);
                 StudentModel result = _mapper.Map<StudentModel>(studentToAdd);
                 result.DepartmentName = _departmentRepository.GetDepartmentById(newStudent.DepartmentId).Name;
                 return Created($"api/student/{result.Id}", result);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<StudentModel> Put(StudentModel updatedStudent)
+        {
+            try
+            {
+                StudentModel result;
+                Student? updatedStudentDM = _mapper.Map<Student>(updatedStudent);
+                updatedStudentDM = _studentRepository.UpdateStudent(updatedStudentDM);
+                if(updatedStudentDM != null)
+                {
+                    result = _mapper.Map<StudentModel>(updatedStudentDM);
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound("Student not found");
+                }
             }
             catch
             {
