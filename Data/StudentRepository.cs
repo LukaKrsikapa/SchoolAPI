@@ -23,6 +23,17 @@ namespace SchoolAPI.Data
             return newStudent;
         }
 
+        public Student? DeleteStudent(int deletedStudentId)
+        {
+            Student result = GetStudentById(deletedStudentId);
+            if(result != null)
+            {
+                _db.Remove(result);
+                _db.SaveChanges();
+            }
+            return result;
+        }
+
         public Student? GetStudentById(int? id)
         {
             Student? result;

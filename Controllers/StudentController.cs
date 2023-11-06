@@ -119,5 +119,25 @@ namespace SchoolAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpDelete]
+        public ActionResult<StudentModel> Put(int studentId)
+        {
+            try
+            {
+                if(studentId != null)
+                {
+                    _studentRepository.DeleteStudent(studentId);
+                }
+                else
+                {
+                    return BadRequest("Id is required");
+                }
+                return StatusCode(StatusCodes.Status204NoContent);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
