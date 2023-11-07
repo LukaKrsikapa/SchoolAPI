@@ -21,7 +21,7 @@ namespace SchoolAPI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("AllStudents")]
+        [HttpGet]
         public ActionResult<List<StudentModel>> GetAllStudets()
         {
             try
@@ -37,7 +37,7 @@ namespace SchoolAPI.Controllers
             }
         }
 
-        [HttpGet("ByDeptId")]
+        [HttpGet("DeptId")]
         public ActionResult<List<StudentModel>> GetByDepartmentId(int? departmentId)
         {
             IEnumerable<Student> students;
