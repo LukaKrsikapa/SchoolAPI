@@ -11,10 +11,10 @@ namespace SchoolAPI.Controllers
     [ApiController]
     public class FinalController : ControllerBase
     {
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
         private readonly IFinalRepository _finalRepository;
 
-        public FinalController(Mapper mapper, IFinalRepository finalRepository)
+        public FinalController(IMapper mapper, IFinalRepository finalRepository)
         {
             _mapper = mapper;
             _finalRepository = finalRepository;
