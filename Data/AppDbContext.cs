@@ -13,10 +13,15 @@ namespace SchoolAPI.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Final> Finals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Final>().HasData(new Final { Id = 1, Name = "Primer polaganja 1", CourseId = 1, Date = DateTime.Today, Mark = 10, StudentId = 1 });
+            modelBuilder.Entity<Final>().HasData(new Final { Id = 2, Name = "Primer polaganja 2", CourseId = 1, Date = DateTime.Today, Mark = 10, StudentId = 2 });
+            modelBuilder.Entity<Final>().HasData(new Final { Id = 3, Name = "Primer polaganja 3", CourseId = 2, Date = DateTime.Today, Mark = 10, StudentId = 1 });
 
             modelBuilder.Entity<Department>().HasData(new Department
             {
