@@ -20,13 +20,35 @@ namespace SchoolAPI.Controllers
             _finalRepository = finalRepository;
         }
 
-        [HttpGet("StudentFinals")]
+        [HttpGet]
         public ActionResult<List<FinalModel>> Get(int studentId)
         {
             try
             {
                 List<Final> finals = _finalRepository.GetFinalsByStudentId(studentId).ToList();
                 List<FinalModel> result = _mapper.Map<List<FinalModel>>(finals);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpGet("id")]
+        public ActionResult<FinalModel> Get(int studentId, int id)
+        {
+            try
+            {
+                FinalModel? result = null;
+
+                Final? finalDM = _finalRepository.GetFinalById(id);
+
+                if (finalDM != null && finalDM.StudentId == studentId)
+                {
+                    result = _mapper.Map<FinalModel>(finalDM);
+                }
+                
                 return Ok(result);
             }
             catch
