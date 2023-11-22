@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using SchoolAPI.Data;
 using SchoolAPI.Data.Entities;
 using SchoolAPI.Models;
@@ -52,6 +53,23 @@ namespace SchoolAPI.Controllers
                 return Ok(result);
             }
             catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost("Add")]
+        public ActionResult<FinalModel> AddFinal(int studentId, FinalModel finalBM)
+        {
+            try
+            {
+                Final finalDM = _mapper.Map<Final>(finalBM);
+                finalDM.StudentId = studentId;
+                finalDM = _finalRepository.AddFinal(finalDM);
+                FinalModel result = _mapper.Map<FinalModel>(finalDM);
+                return Created($"api/students/{result.Id}", result);
+            }
+            catch(Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }

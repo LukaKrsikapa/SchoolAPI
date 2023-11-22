@@ -15,8 +15,8 @@ namespace SchoolAPI.Data
 
         public Final AddFinal(Final newFinal)
         {
-            _db.Finals.Add(newFinal);
             newFinal.Date = DateTime.Today;
+            _db.Finals.Add(newFinal);
             _db.SaveChanges();
 
             return newFinal;
