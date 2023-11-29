@@ -8,5 +8,6 @@ namespace SchoolAPI.Data
         public Final? GetFinalById(int id);
         public IEnumerable<Final>? GetFinalsByStudentId(int id);
         public Final AddFinal(Final newFinal);
+        public Final Update(Final final);
     }
 }

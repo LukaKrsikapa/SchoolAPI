@@ -74,5 +74,22 @@ namespace SchoolAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        [HttpPut]
+        public ActionResult<FinalModel> Put(int studentId, int id, FinalModel updatedFinalModel)
+        {
+            try
+            {
+                Final finalDM = _mapper.Map<Final>(updatedFinalModel);
+                finalDM.StudentId = studentId;
+                finalDM.Id = id;
+                finalDM = _finalRepository.Update(finalDM);
+                updatedFinalModel = _mapper.Map<FinalModel>(finalDM);
+                return updatedFinalModel;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

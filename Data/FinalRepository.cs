@@ -33,5 +33,20 @@ namespace SchoolAPI.Data
             IEnumerable<Final>? result = _db.Finals.Include(f => f.Course).Where(f => f.StudentId == studentId);
             return result;
         }
+
+        public Final Update(Final final)
+        {
+            Final updatedFinal = _db.Finals.FirstOrDefault(f => f.Id == final.Id && f.StudentId == final.StudentId);
+
+            if(updatedFinal != null)
+            {
+                updatedFinal.Mark = final.Mark;
+                updatedFinal.Name = final.Name;
+                _db.SaveChanges();
+            }
+
+            return updatedFinal;
+            
+        }
     }
 }
