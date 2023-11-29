@@ -9,6 +9,7 @@ namespace SchoolAPI.Models
         public DateTime Date { get; set; }
         public int Mark { get; set; }
         public int CourseId { get; set; }
+        public CourseModel Course { get; set; }
         public string? CourseName { get; set; }
         public int StudentId { get; set; }
     }

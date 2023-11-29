@@ -30,7 +30,7 @@ namespace SchoolAPI.Data
 
         public IEnumerable<Final>? GetFinalsByStudentId(int studentId)
         {
-            IEnumerable<Final>? result = _db.Finals.Where(f => f.StudentId == studentId);
+            IEnumerable<Final>? result = _db.Finals.Include(f => f.Course).Where(f => f.StudentId == studentId);
             return result;
         }
     }
